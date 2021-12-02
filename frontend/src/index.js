@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    addCreateForm();
     fetchStores();
 })
 
@@ -14,4 +15,16 @@ function fetchStores(){
         })
     })
     .catch(err => console.warn(err))
+}
+
+function addCreateForm(){
+    const formContainer = document.getElementById("form-container");
+    const form = document.createElement('form');
+    form.innerHTML = `<input placeholder='name' type='text'/><br><input value='Create Store' type='submit'>`;
+    // const input = document.createElement('input');
+    // input.setAttribute('type', 'text');
+    // input.type = 'text';
+    formContainer.append(form);
+
+    // form.addEventListener("submit", handleSubmit())
 }
