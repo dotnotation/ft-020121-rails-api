@@ -35,7 +35,6 @@ function addCreateForm(){
 function handleSubmit(event){
     event.preventDefault()
     const nameInput = event.target[0]
-    debugger 
     if (editMode){
         fetch(`http://localhost:3000/api/v1/stores/${editMode.dataset.id}`, {
             method: "PATCH",

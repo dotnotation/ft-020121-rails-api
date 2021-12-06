@@ -1,5 +1,5 @@
-# class StoresController < ApplicationController
-#   before_action :set_store, only: [:show, :update, :destroy]
+class StoresController < ApplicationController
+  before_action :set_store, only: [:show, :update, :destroy]
 
 #   # GET /stores
  
@@ -31,27 +31,36 @@
   end
 
 #   # # PATCH/PUT /stores/1
-#   # def update
-#   #   if @store.update(store_params)
-#   #     render json: @store
-#   #   else
-#   #     render json: @store.errors, status: :unprocessable_entity
-#   #   end
-#   # end
+  def update
+    if @store.update(store_params)
+      render json: {
+          status: 204, 
+          store: @store
+        }
+    else
+      render json: {
+        status: 400,
+        errors: @store.errors.full_messages.join(", ")
+        }, status: :unprocessable_entity
+    end
+  end
 
 #   # # DELETE /stores/1
-#   # def destroy
-#   #   @store.destroy
-#   # end
+  def destroy
+    if @store.destroy
+        render json: {message: "Successfully deleted", store: @store}
+    else
+        render json: {message: "Failed to delete"}
+  end
 
-#   private
-#     # Use callbacks to share common setup or constraints between actions.
-#     def set_store
-#       @store = Store.find(params[:id])
-#     end
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_store
+      @store = Store.find(params[:id])
+    end
 
-#     # Only allow a list of trusted parameters through.
-#     def store_params
-#       params.require(:store).permit(:name)
-#     end
-# end
+    # Only allow a list of trusted parameters through.
+    def store_params
+      params.require(:store).permit(:name)
+    end
+end
