@@ -26,6 +26,7 @@ function addCreateForm(){
     // const input = document.createElement('input');
     // input.setAttribute('type', 'text')
     // input.type = "text"
+    // form.append(name, input, title) append can take multiple arguments 
     formContainer.append(form)
 
     form.addEventListener("submit", handleSubmit)
@@ -34,6 +35,7 @@ function addCreateForm(){
 function handleSubmit(event){
     event.preventDefault()
     const nameInput = event.target[0]
+    debugger 
     if (editMode){
         fetch(`http://localhost:3000/api/v1/stores/${editMode.dataset.id}`, {
             method: "PATCH",

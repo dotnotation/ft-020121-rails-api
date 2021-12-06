@@ -2,27 +2,33 @@
 #   before_action :set_store, only: [:show, :update, :destroy]
 
 #   # GET /stores
-#   def index
-#     @stores = Store.all
+ 
 
-#     render json: @stores
-#   end
-
-#   # GET /stores/1
-#   # def show
-#   #   render json: @store
-#   # end
+  # GET /stores/1
+  def show
+    render json: @store, only: [:name, :id], include: {
+        products: {
+            except: [:created_at, :updated_at]
+        }
+    }
+  end
 
 #   # # POST /stores
-#   # def create
-#   #   @store = Store.new(store_params)
+  def create
+    @store = Store.new(store_params)
 
-#   #   if @store.save
-#   #     render json: @store, status: :created, location: @store
-#   #   else
-#   #     render json: @store.errors, status: :unprocessable_entity
-#   #   end
-#   # end
+    if @store.save
+      render json: {
+          status: 201, 
+          store: @store, 
+        }, status: :created, location: api_v1_store_path(@store)
+    else
+      render json: {
+          status: 422,
+          errors: @store.errors.full_messages.join(", ")
+          }, status: :unprocessable_entity
+    end
+  end
 
 #   # # PATCH/PUT /stores/1
 #   # def update
