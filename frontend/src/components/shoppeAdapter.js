@@ -5,6 +5,7 @@ class ShoppeAdapter {
     constructor(baseURL){
         this.baseStoreURL = `${baseURL}/api/v1/stores`
     }
+    // automatically setting up the port for the shop request
 
     getStores(){
         fetch(this.baseStoreURL)
