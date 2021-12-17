@@ -3,6 +3,7 @@ class Product {
     static all = []
 
     constructor({id, name, description, price, store_id, stock}){
+        // passing in an object as it is a better way to make sure things get passed in the correct order
         this.id = id
         this.name = name
         this.description = description

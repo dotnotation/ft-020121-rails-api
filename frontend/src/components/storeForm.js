@@ -14,9 +14,24 @@ class StoreForm {
         formContainer.append(form)
     
         form.addEventListener("submit", this.handleSubmit)
+        // because this is a method on the object and not a function, you have to call 'this' on handleSubmit
     }
 
-    // making arrow function since it's passed into an eventListener
+    // making arrow function since it's passed into an eventListener so you don't have to use the constructor above
+    // a property set to an anonymous function
+    // using this arrow function will define the context of this because of when it is defined 
+    // handleSubmit = (event) => {
+    //     event.preventDefault()
+    //     const nameInput = event.target[0]
+    //     if (editMode){
+    //         shoppeAdapter.editStore(editMode, nameInput)
+    //     } else {
+    //         shoppeAdapter.createStore(nameInput)
+    //     }  
+    // }
+
+    // if you want to use the constructor, this is the code you would use if you don't want to use bind
+    // either way is acceptable 
     handleSubmit(event) {
         event.preventDefault()
         const nameInput = event.target[0]
